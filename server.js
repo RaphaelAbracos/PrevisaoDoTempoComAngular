@@ -1,13 +1,22 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 8080;
+const path = require('path');
+const port = process.env.PORT || 8000;
+const server = require('http').Server(app);
 
-app.use(express.static(__dirname + '/dist/Requisicoes'));
+app.use(express.static(__dirname, 'dist', {index: false}));
 
-app.get('/*', (req, res)=> {
-  res.sendFile(__dirname + '/dist/Requisicoes/index.html');
+
+server.listen(port, function() {
+    console.log("App running on port " + port);
 })
 
-app.listen(PORT, ()=>{
-  console.log('Servidor iniciado na porta' + PORT);
-})
+// PathLocationStrategy
+
+app.get('', function(req, res) {
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
+});
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
+});
