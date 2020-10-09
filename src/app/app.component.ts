@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Previsao } from './model/previsao';
+import { PrevisoesService } from './previsoes.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Requisicoes';
+
+    public previsoes: Previsao[];
+
+    constructor(private previsoesService: PrevisoesService){
+      previsoesService.obterPrevisoes().subscribe((previsoes)=> {
+        this.previsoes = previsoes['list'];
+        console.log(this.previsoes);
+      });
+    }
+
 }
