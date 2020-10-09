@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.static(__dirname + '/dist/Requisicoes'));
 
 app.get('/*', (req, res)=> {
-  res.sendFile(__dirname + '/dist/angular-teste/index.html');
+  res.sendFile(__dirname + '/dist/Requisicoes/index.html');
 })
 
 app.listen(PORT, ()=>{
